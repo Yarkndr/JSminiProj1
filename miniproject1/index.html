@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index HTML</title>
+</head>
+<body>
+
+<div id="wrap"></div>
+<script>
+
+    const foo = async () => {
+        const json = await fetch ('https://jsonplaceholder.typicode.com/users')
+        const users = await json.json();
+        console.log(users)
+
+        const wrap = document.getElementById('wrap')
+
+        for (const user of users) {
+            const div = document.createElement('div')
+            const button = document.createElement('button');
+
+            div.innerText = `Id: ${user.id};  Name: ${user.name}`;
+            button.innerText = 'show details';
+
+            div.appendChild(button);
+            wrap.appendChild(div);
+
+
+            button.onclick = function () {
+                location.href = `user-details.html?userId=${user.id}`
+
+            };
+
+        }
+
+    };
+
+    void (foo);
+
+
+
+</script>
+</body>
+</html>
